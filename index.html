@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Learn with Leaders | Three Global Camps</title>
+<style>
+  :root{
+    --navy:#10233f; --blue:#2457d6; --sky:#eaf1ff; --gold:#f5b942;
+    --ink:#17253a; --muted:#5d6b80; --paper:#f5f7fb; --white:#fff;
+    --line:#e3e8f0; --green:#187a65;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--paper);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);line-height:1.55}
+  a{color:inherit}
+  .topbar{background:var(--navy);color:#fff;padding:13px 5vw;display:flex;align-items:center;justify-content:space-between;gap:20px}
+  .brand{font-size:1.05rem;font-weight:800;letter-spacing:.02em}.brand span{color:var(--gold)}
+  .topbar small{color:#dce6f6;font-size:.82rem}
+  .wrap{max-width:1120px;margin:auto;padding:0 24px}
+  .hero{background:linear-gradient(120deg,rgba(11,29,55,.96),rgba(30,69,132,.83)),url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1800&q=85') center/cover;color:#fff;padding:76px 0 68px}
+  .eyebrow{text-transform:uppercase;letter-spacing:.17em;font-size:.75rem;font-weight:800;color:#ffcf68}
+  h1{font-size:clamp(2.5rem,6vw,4.6rem);line-height:1.02;letter-spacing:-.045em;margin:16px 0 20px;max-width:800px}
+  .hero p{max-width:690px;font-size:1.12rem;color:#e8eef8;margin:0 0 28px}
+  .hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border-radius:999px;padding:13px 20px;font-weight:800;font-size:.92rem;transition:transform .15s,background .15s}
+  .btn:hover{transform:translateY(-2px)}
+  .btn-primary{background:var(--gold);color:#17253a}.btn-outline{border:1px solid rgba(255,255,255,.6);color:#fff}
+  .quickfacts{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:-27px;position:relative}
+  .fact{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px 22px;box-shadow:0 12px 30px rgba(18,39,74,.07)}
+  .fact strong{display:block;font-size:1.05rem;color:var(--navy)}.fact span{font-size:.85rem;color:var(--muted)}
+  .intro{text-align:center;padding:66px 0 30px;max-width:760px;margin:auto}
+  .section-kicker{color:var(--blue);font-size:.75rem;text-transform:uppercase;letter-spacing:.15em;font-weight:850}
+  h2{font-size:clamp(1.8rem,4vw,2.7rem);letter-spacing:-.035em;line-height:1.1;color:var(--navy);margin:10px 0 14px}
+  .intro p{color:var(--muted);font-size:1.02rem}
+  .camp-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;padding:18px 0 68px}
+  .camp{background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 12px 35px rgba(18,39,74,.06)}
+  .camp-image{height:190px;background-size:cover;background-position:center;position:relative}
+  .camp-image:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(8,24,48,.62),transparent 72%)}
+  .camp-tag{position:absolute;z-index:1;bottom:15px;left:17px;color:#fff;font-size:.76rem;font-weight:850;letter-spacing:.09em;text-transform:uppercase}
+  .camp-body{padding:23px;display:flex;flex-direction:column;flex:1}
+  .camp h3{font-size:1.38rem;line-height:1.17;letter-spacing:-.025em;color:var(--navy);margin:0 0 10px}
+  .location{color:var(--blue);font-weight:750;font-size:.85rem;margin-bottom:14px}
+  .camp p{font-size:.92rem;color:var(--muted);margin:0 0 17px}
+  .details{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 0;margin:0 0 16px;display:grid;gap:9px}
+  .detail{display:flex;gap:10px;font-size:.86rem}.detail b{min-width:83px;color:var(--ink)}.detail span{color:var(--muted)}
+  .camp ul{padding-left:18px;margin:0 0 22px;color:#35445a;font-size:.88rem}
+  .camp li{margin:6px 0}
+  .camp .btn{width:100%;margin-top:auto}
+  .alert{background:#fff7e5;border:1px solid #f3d28a;color:#66470b;border-radius:12px;padding:12px 14px;font-size:.82rem;margin:0 0 17px}
+  .included{background:#eaf0fb;padding:58px 0}
+  .included-inner{display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;align-items:center}
+  .included p{color:var(--muted)}
+  .benefits{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  .benefit{background:#fff;border:1px solid #dce5f4;border-radius:13px;padding:15px;font-size:.9rem;font-weight:700}
+  .benefit span{display:block;font-size:1.2rem;margin-bottom:5px}
+  .steps{padding:62px 0}
+  .steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:26px}
+  .step{padding:20px;background:#fff;border:1px solid var(--line);border-radius:15px}
+  .step-num{width:34px;height:34px;display:grid;place-items:center;background:var(--sky);color:var(--blue);font-weight:900;border-radius:50%;margin-bottom:12px}
+  .step h3{margin:0 0 6px;font-size:1rem;color:var(--navy)}.step p{margin:0;color:var(--muted);font-size:.9rem}
+  .closing{background:var(--navy);color:#fff;padding:54px 24px;text-align:center}
+  .closing h2{color:#fff;max-width:700px;margin:10px auto 15px}.closing p{color:#d8e3f4;max-width:660px;margin:0 auto 24px}
+  footer{background:#0a172a;color:#c4cfdf;padding:24px 5vw;font-size:.82rem}
+  .footer-inner{max-width:1120px;margin:auto;display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
+  footer a{color:#fff}
+  .fineprint{font-size:.76rem;color:#9eacc1;margin-top:12px;max-width:900px}
+  @media(max-width:900px){.camp-grid{grid-template-columns:1fr 1fr}.included-inner{grid-template-columns:1fr;gap:22px}}
+  @media(max-width:620px){.topbar{align-items:flex-start;flex-direction:column;gap:4px}.hero{padding:58px 0}.quickfacts{grid-template-columns:1fr;margin-top:16px}.camp-grid{grid-template-columns:1fr;padding-bottom:46px}.camp-image{height:210px}.intro{padding-top:48px}.benefits,.steps-grid{grid-template-columns:1fr}.wrap{padding:0 18px}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">LEARN <span>WITH</span> LEADERS</div>
+  <small>Global learning experiences for curious minds</small>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div class="eyebrow">Winter 2026–27 · Applications open</div>
+      <h1>Three global camps.<br>One world of possibilities.</h1>
+      <p>Build a business idea in Spain, explore the future of healthcare in Cambridge, or grow as a young global leader at Harvard. Find the programme that fits your curiosity—and take your learning beyond the classroom.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#camps">Explore the camps ↓</a>
+        <a class="btn btn-outline" href="https://www.learnwithleaders.com/">Visit Learn with Leaders</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="quickfacts">
+      <div class="fact"><strong>Grades 8–12</strong><span>Programmes for curious high-school students</span></div>
+      <div class="fact"><strong>Learn by doing</strong><span>Workshops, projects and real-world questions</span></div>
+      <div class="fact"><strong>Meet the world</strong><span>Connect with peers across cultures and interests</span></div>
+    </div>
+    <section class="intro" id="camps">
+      <div class="section-kicker">Choose your next adventure</div>
+      <h2>Three ways to make your winter count</h2>
+      <p>Explore entrepreneurship and AI, take your first steps into medicine and public health, or practise the communication and collaboration skills of a thoughtful leader.</p>
+    </section>
+
+    <section class="camp-grid" aria-label="Upcoming camps">
+      <article class="camp">
+        <div class="camp-image" style="background-image:url('https://images.unsplash.com/photo-1562883676-8c7feb83f09b?auto=format&fit=crop&w=1000&q=85')">
+          <div class="camp-tag">Salamanca, Spain · 🇪🇸</div>
+        </div>
+        <div class="camp-body">
+          <h3>Entrepreneurship Powered by AI</h3>
+          <div class="location">University of Salamanca</div>
+          <p>Turn ideas into business possibilities in one of Europe’s historic university cities. Learn how entrepreneurs research markets, understand finances and use AI thoughtfully.</p>
+          <div class="details">
+            <div class="detail"><b>Dates</b><span>14–20 December 2026</span></div>
+            <div class="detail"><b>Duration</b><span>7 days / 6 nights</span></div>
+            <div class="detail"><b>Eligibility</b><span>Grades 8–12</span></div>
+            <div class="detail"><b>Fee</b><span>€3,250 per student</span></div>
+          </div>
+          <ul>
+            <li>Entrepreneurship, pricing, finance and business planning</li>
+            <li>AI tools, creative thinking and presenting ideas</li>
+            <li>Accommodation, meals, airport transfers and cultural tours included</li>
+            <li>Letter of participation from the University of Salamanca</li>
+          </ul>
+          <div class="alert"><strong>Application deadline: 15 October 2026.</strong> Check the official page immediately for current application status.</div>
+          <a class="btn btn-primary" href="https://www.learnwithleaders.com/camps/salamancaspaincamp/" target="_blank" rel="noopener">View camp & apply ↗</a>
+        </div>
+      </article>
+
+      <article class="camp">
+        <div class="camp-image" style="background-image:url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1000&q=85')">
+          <div class="camp-tag">Cambridge, USA · 🩺</div>
+        </div>
+        <div class="camp-body">
+          <h3>Pre-Med Horizons Programme</h3>
+          <div class="location">At Harvard University · By HUGEM</div>
+          <p>Explore the science, systems and social questions shaping healthcare—and work with others to propose solutions to a real-world health challenge.</p>
+          <div class="details">
+            <div class="detail"><b>Dates</b><span>4–9 January 2027</span></div>
+            <div class="detail"><b>Format</b><span>Day camp · 6 days</span></div>
+            <div class="detail"><b>Eligibility</b><span>Grades 8–12</span></div>
+            <div class="detail"><b>Fee</b><span>US$1,500 per student</span></div>
+          </div>
+          <ul>
+            <li>Human physiology, public health and healthcare systems</li>
+            <li>AI in health, vaccines, innovation and medical ethics</li>
+            <li>Team-based “Future of Health” capstone challenge</li>
+            <li>Lunch on programme days, workshops, outings and certificate included</li>
+          </ul>
+          <div class="alert"><strong>Application deadline: 31 October 2026.</strong> No prior medical coursework is required.</div>
+          <a class="btn btn-primary" href="https://www.learnwithleaders.com/camps/premed-horizons-program/" target="_blank" rel="noopener">View camp & apply ↗</a>
+        </div>
+      </article>
+
+      <article class="camp">
+        <div class="camp-image" style="background-image:url('https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1000&q=85')">
+          <div class="camp-tag">Cambridge, USA · 🎓</div>
+        </div>
+        <div class="camp-body">
+          <h3>Young Global Leaders Winter Camp</h3>
+          <div class="location">Harvard College Union Society (HCUS)</div>
+          <p>Build confidence as a communicator, practise critical thinking and collaborate with students from around the world in an eight-day leadership experience.</p>
+          <div class="details">
+            <div class="detail"><b>Cohort 1</b><span>3–10 January 2027</span></div>
+            <div class="detail"><b>Cohort 2</b><span>10–17 January 2027</span></div>
+            <div class="detail"><b>Eligibility</b><span>Grades 8–12</span></div>
+            <div class="detail"><b>Fee</b><span>US$4,250 early / US$4,650 regular</span></div>
+          </div>
+          <ul>
+            <li>Public speaking, networking and presentation skills</li>
+            <li>Leadership case studies and team projects</li>
+            <li>Seven nights’ accommodation, meals and Boston Logan airport transfers included</li>
+            <li>Outings, workshops and certificate from HCUS</li>
+          </ul>
+          <div class="alert"><strong>Early deadline: 30 November 2026.</strong> Regular deadline: 7 December 2026. Limited places are available.</div>
+          <a class="btn btn-primary" href="https://www.learnwithleaders.com/camps/hucswintercamp/" target="_blank" rel="noopener">View camp & apply ↗</a>
+        </div>
+      </article>
+    </section>
+  </div>
+
+  <section class="included">
+    <div class="wrap included-inner">
+      <div>
+        <div class="section-kicker">More than a classroom</div>
+        <h2>Learn something. Make something. Meet your people.</h2>
+        <p>Across these programmes, students can explore new subjects, learn through discussion and practical projects, and meet peers who bring different experiences and points of view.</p>
+        <p>Choose the camp that matches the questions you want to ask—and the skills you want to build.</p>
+      </div>
+      <div class="benefits">
+        <div class="benefit"><span>💡</span>Practical workshops and projects</div>
+        <div class="benefit"><span>🌍</span>International peer connections</div>
+        <div class="benefit"><span>🧠</span>Critical thinking and problem-solving</div>
+        <div class="benefit"><span>🎤</span>Communication and presentation</div>
+        <div class="benefit"><span>🧭</span>Explore future study and career paths</div>
+        <div class="benefit"><span>📜</span>Programme certificates or participation recognition</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="steps">
+    <div class="wrap">
+      <div class="section-kicker">Your next step</div>
+      <h2>From curious to committed in three steps</h2>
+      <div class="steps-grid">
+        <div class="step"><div class="step-num">1</div><h3>Explore</h3><p>Open the official programme page and review the curriculum, dates, fees and eligibility.</p></div>
+        <div class="step"><div class="step-num">2</div><h3>Prepare</h3><p>Check application requirements, travel arrangements, visa needs and what the fee includes.</p></div>
+        <div class="step"><div class="step-num">3</div><h3>Apply</h3><p>Use the official application link on the programme page to submit your application.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="closing">
+    <div class="eyebrow">Your winter. Your next chapter.</div>
+    <h2>Big questions can lead to big journeys.</h2>
+    <p>Choose your camp, bring your curiosity, and make this winter a chance to learn beyond the classroom.</p>
+    <a class="btn btn-primary" href="#camps">Explore all three camps ↑</a>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div><strong>LEARN WITH LEADERS</strong><br>Learn. Connect. Lead.</div>
+    <div><a href="https://www.learnwithleaders.com/">learnwithleaders.com</a><br><a href="mailto:team@learnwithleaders.com">team@learnwithleaders.com</a></div>
+  </div>
+  <div class="footer-inner fineprint">
+    Programme details are based on the official pages linked above and may change. Please confirm current dates, fees, deadlines, inclusions and eligibility with the organiser before applying. Airfare and visa costs are not included in the Salamanca or HCUS programme fees. The Pre-Med Horizons Programme is a day camp; accommodation is not listed as included. The HCUS camp is organised by the Harvard College Union Society, an independent student-run organisation, and is not provided or endorsed by Harvard University. The Pre-Med Horizons Programme is organised by HUGEM, an independent student-run organisation.
+  </div>
+</footer>
+</body>
+</html>
